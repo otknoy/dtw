@@ -1,6 +1,4 @@
-var DTW = function() {
-
-};
+var DTW = {};
 
 function createMatrix(n, m) {
     var d = new Array(n);
@@ -28,14 +26,14 @@ function createDtwMatrix(n, m) {
     return dtw;
 }
 
-DTW.prototype.distance = function(ts1, ts2) {
+DTW.distance = function(ts1, ts2, distFunc) {
     var n = ts1.length;
     var m = ts2.length;
     var dtw = createDtwMatrix(n, m);
 
     for (var i = 1; i < n; i++) {
 	for (var j = 1; j < m; j++) {
-	    var cost = ts1[i].distance(ts2[j]);
+	    var cost = distFunc(ts1[i], ts2[j]);
 	    dtw[i][j] = cost + Math.min(dtw[i-1][j], dtw[i][j-1], dtw[i-1][j-1]);
 	}
     }
