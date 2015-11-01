@@ -4,10 +4,10 @@ var Point = function(x, y, z) {
     this.z = z;
 };
 
-Point.prototype.distance = function(point) {
-    var x = Math.pow(this.x - point.x, 2);
-    var y = Math.pow(this.y - point.y, 2);
-    var z = Math.pow(this.z - point.z, 2);
+Point.distance = function(p1, p2) {
+    var x = Math.pow(p1.x - p2.x, 2);
+    var y = Math.pow(p1.y - p2.y, 2);
+    var z = Math.pow(p1.z - p2.z, 2);
     var d = Math.sqrt(x + y + z);
     return d;
 };
