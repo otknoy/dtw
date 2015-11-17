@@ -29,16 +29,19 @@ function createDtwMatrix(n, m) {
 DTW.distance = function(ts1, ts2, distFunc) {
     var n = ts1.length;
     var m = ts2.length;
-    var dtw = createDtwMatrix(n, m);
 
-    for (var i = 1; i < n; i++) {
-	for (var j = 1; j < m; j++) {
-	    var cost = distFunc(ts1[i], ts2[j]);
+    var dtw = createDtwMatrix(n+1, m+1);
+
+    for (var i = 1; i <= n; i++) {
+	for (var j = 1; j <= n; j++) {
+	    var cost = distFunc(ts1[i-1], ts2[j-1]);
 	    dtw[i][j] = cost + Math.min(dtw[i-1][j], dtw[i][j-1], dtw[i-1][j-1]);
 	}
     }
 
-    return dtw[n-1][m-1];
+    console.log(dtw);
+
+    return dtw[n][m];
 };
 
 module.exports = DTW;
